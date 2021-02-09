@@ -1,0 +1,558 @@
+  [1m[35m (296.3ms)[0m  [1m[35mCREATE DATABASE "the-gossip-project_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (344.6ms)[0m  [1m[35mCREATE DATABASE "the-gossip-project_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (32.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (51.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(702395403811080105)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateCities (20190425150227)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (78.5ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "name" character varying, "zip_code" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425150227_create_cities.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425150227"]]
+  ↳ bin/rails:9
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190425150314)
+  [1m[35m (40.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "description" text, "email" character varying, "age" integer, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425150314_create_users.rb:3
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_city_id" ON "users"  ("city_id")[0m
+  ↳ db/migrate/20190425150314_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425150314"]]
+  ↳ bin/rails:9
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateGossips (20190425150342)
+  [1m[35m (40.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (48.2ms)[0m  [1m[35mCREATE TABLE "gossips" ("id" bigserial primary key, "title" character varying, "content" text, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425150342_create_gossips.rb:3
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE  INDEX  "index_gossips_on_user_id" ON "gossips"  ("user_id")[0m
+  ↳ db/migrate/20190425150342_create_gossips.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425150342"]]
+  ↳ bin/rails:9
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTags (20190425150356)
+  [1m[35m (39.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425150356_create_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425150356"]]
+  ↳ bin/rails:9
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreatePrivateMessages (20190425150421)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (48.8ms)[0m  [1m[35mCREATE TABLE "private_messages" ("id" bigserial primary key, "content" text, "recipient_id" bigint, "sender_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425150421_create_private_messages.rb:3
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_private_messages_on_recipient_id" ON "private_messages"  ("recipient_id")[0m
+  ↳ db/migrate/20190425150421_create_private_messages.rb:3
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_private_messages_on_sender_id" ON "private_messages"  ("sender_id")[0m
+  ↳ db/migrate/20190425150421_create_private_messages.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425150421"]]
+  ↳ bin/rails:9
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTagGossips (20190425151145)
+  [1m[35m (41.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "tag_gossips" ("id" bigserial primary key, "tag_id" bigint, "gossip_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190425151145_create_tag_gossips.rb:3
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_tag_gossips_on_tag_id" ON "tag_gossips"  ("tag_id")[0m
+  ↳ db/migrate/20190425151145_create_tag_gossips.rb:3
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE  INDEX  "index_tag_gossips_on_gossip_id" ON "tag_gossips"  ("gossip_id")[0m
+  ↳ db/migrate/20190425151145_create_tag_gossips.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190425151145"]]
+  ↳ bin/rails:9
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-02-09 02:08:25.573860"], ["updated_at", "2021-02-09 02:08:25.573860"]]
+  ↳ bin/rails:9
+  [1m[35m (41.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(702395403811080105)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2021-02-09 03:08:43 +0100
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Brahfit/.rvm/gems/ruby-2.7.1/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (36.6ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (51.6ms)
+Completed 200 OK in 822ms (Views: 722.2ms | ActiveRecord: 43.3ms)
+
+
+Started GET "/" for ::1 at 2021-02-09 03:08:48 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (1.6ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 39ms (Views: 32.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:08:50 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 39ms (Views: 36.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:08:51 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 29ms (Views: 27.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:08:53 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.5ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 37ms (Views: 31.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:08:53 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 35ms (Views: 29.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:08:54 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 29ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:08:59 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 27.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:02 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 34ms (Views: 31.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:09:03 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.4ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 33ms (Views: 31.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:09:05 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 40ms (Views: 38.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:09:06 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (1.2ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 39ms (Views: 37.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:07 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 36ms (Views: 34.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:09:08 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 44ms (Views: 42.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:09 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 40ms (Views: 37.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:09:10 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 37ms (Views: 35.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:11 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 79ms (Views: 77.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:09:12 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 39ms (Views: 37.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:13 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 42ms (Views: 39.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:09:14 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 39ms (Views: 33.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:09:14 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 34ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:09:15 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 29ms (Views: 27.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:09:16 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 47ms (Views: 44.4ms | ActiveRecord: 0.3ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGossip Create (48.5ms)[0m  [1m[32mINSERT INTO "gossips" ("title", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Potin de l'annee"], ["content", "Je galere a THP"], ["created_at", "2021-02-09 02:15:30.672361"], ["updated_at", "2021-02-09 02:15:30.672361"]]
+  [1m[35m (45.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGossip Load (2.5ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  [1m[36mGossip Load (1.2ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (45.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "description", "email", "age", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["first_name", "Antoine"], ["last_name", "Rechain"], ["description", "Moussaillon de THP"], ["email", "a.rechain@mail.com"], ["age", 25], ["created_at", "2021-02-09 02:21:27.418770"], ["updated_at", "2021-02-09 02:21:27.418770"]]
+  [1m[35m (41.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:22:03 +0100
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Brahfit/.rvm/gems/ruby-2.7.1/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.6ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (54.1ms)
+Completed 500 Internal Server Error in 90ms (ActiveRecord: 5.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    4:         <% @all_gossips.each do |gossip| %>
+    5:           <div class="card border-info text-white bg-info mb-3">
+    6:             <div class="card-header bg-light text-warning">
+    7:               <%= link_to 'Auteur:', user_show_path(:user_id => gossip.user.id), style: "text-decoration: none" %>
+    8:               <%= gossip.user.first_name %> <%= gossip.user.last_name %>
+    9:             </div>
+   10:             <div class="card-body">
+  
+app/views/home/gossip.html.erb:7:in `block in _app_views_home_gossip_html_erb__1063096680020160113_12480'
+app/views/home/gossip.html.erb:4:in `_app_views_home_gossip_html_erb__1063096680020160113_12480'
+Started PUT "/__web_console/repl_sessions/9177621e54528019b49659feb067256c" for ::1 at 2021-02-09 03:22:33 +0100
+Started PUT "/__web_console/repl_sessions/9177621e54528019b49659feb067256c" for ::1 at 2021-02-09 03:22:44 +0100
+Started PUT "/__web_console/repl_sessions/9177621e54528019b49659feb067256c" for ::1 at 2021-02-09 03:22:49 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(702395403811080105)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(702395403811080105)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:23:22 +0100
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Brahfit/.rvm/gems/ruby-2.7.1/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (1.2ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  Rendered home/gossip.html.erb within layouts/application (45.0ms)
+Completed 500 Internal Server Error in 99ms (ActiveRecord: 6.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    4:         <% @all_gossips.each do |gossip| %>
+    5:           <div class="card border-info text-white bg-info mb-3">
+    6:             <div class="card-header bg-light text-warning">
+    7:               <%= link_to 'Auteur:', user_show_path(:user_id => gossip.user.id), style: "text-decoration: none" %>
+    8:               <%= gossip.user.first_name %> <%= gossip.user.last_name %>
+    9:             </div>
+   10:             <div class="card-body">
+  
+app/views/home/gossip.html.erb:7:in `block in _app_views_home_gossip_html_erb__4178356253693207091_12480'
+app/views/home/gossip.html.erb:4:in `_app_views_home_gossip_html_erb__4178356253693207091_12480'
+  [1m[36mGossip Load (0.7ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  [1m[36mGossip Load (1.1ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mGossip Update (49.3ms)[0m  [1m[33mUPDATE "gossips" SET "user_id" = $1, "updated_at" = $2 WHERE "gossips"."id" = $3[0m  [["user_id", 1], ["updated_at", "2021-02-09 02:28:50.270407"], ["id", 1]]
+  [1m[35m (45.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGossip Load (0.4ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "city_id" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["city_id", 1], ["updated_at", "2021-02-09 02:29:33.142178"], ["id", 1]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCity Create (8.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "zip_code", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Paris"], ["zip_code", 75020], ["created_at", "2021-02-09 02:30:36.500783"], ["updated_at", "2021-02-09 02:30:36.500783"]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCity Load (0.5ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:09 +0100
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Brahfit/.rvm/gems/ruby-2.7.1/gems/activerecord-5.2.4.4/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.7ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (69.1ms)
+Completed 200 OK in 550ms (Views: 512.5ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/home/show_gossip?id=1" for ::1 at 2021-02-09 03:31:14 +0100
+Processing by HomeController#show_gossip as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGossip Load (0.6ms)[0m  [1m[34mSELECT  "gossips".* FROM "gossips" WHERE "gossips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:7
+  Rendering home/show_gossip.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show_gossip.html.erb:4
+  Rendered home/show_gossip.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 37ms (Views: 28.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:31:28 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 45ms (Views: 41.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/contact" for ::1 at 2021-02-09 03:31:30 +0100
+Processing by StaticController#contact as HTML
+  Rendering static/contact.html.erb within layouts/application
+  Rendered static/contact.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 45ms (Views: 40.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/team" for ::1 at 2021-02-09 03:31:31 +0100
+Processing by StaticController#team as HTML
+  Rendering static/team.html.erb within layouts/application
+  Rendered static/team.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 38ms (Views: 36.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:32 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (1.0ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 56ms (Views: 50.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:33 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 49ms (Views: 46.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:34 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 38ms (Views: 35.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:35 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 58ms (Views: 54.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:36 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 42ms (Views: 39.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:38 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.5ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 45ms (Views: 41.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:38 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 41ms (Views: 39.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/home/show_gossip?id=1" for ::1 at 2021-02-09 03:31:42 +0100
+Processing by HomeController#show_gossip as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT  "gossips".* FROM "gossips" WHERE "gossips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:7
+  Rendering home/show_gossip.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show_gossip.html.erb:4
+  Rendered home/show_gossip.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 45ms (Views: 42.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/home/show_gossip?id=1" for ::1 at 2021-02-09 03:31:44 +0100
+Processing by HomeController#show_gossip as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGossip Load (10.3ms)[0m  [1m[34mSELECT  "gossips".* FROM "gossips" WHERE "gossips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:7
+  Rendering home/show_gossip.html.erb within layouts/application
+  [1m[36mUser Load (6.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show_gossip.html.erb:4
+  Rendered home/show_gossip.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 59ms (Views: 39.7ms | ActiveRecord: 16.3ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:45 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 46ms (Views: 44.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/home/show_gossip?id=1" for ::1 at 2021-02-09 03:31:50 +0100
+Processing by HomeController#show_gossip as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGossip Load (0.8ms)[0m  [1m[34mSELECT  "gossips".* FROM "gossips" WHERE "gossips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:7
+  Rendering home/show_gossip.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show_gossip.html.erb:4
+  Rendered home/show_gossip.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 49ms (Views: 41.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/home/show_gossip?id=1" for ::1 at 2021-02-09 03:31:50 +0100
+Processing by HomeController#show_gossip as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGossip Load (0.4ms)[0m  [1m[34mSELECT  "gossips".* FROM "gossips" WHERE "gossips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/home_controller.rb:7
+  Rendering home/show_gossip.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/show_gossip.html.erb:4
+  Rendered home/show_gossip.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 48ms (Views: 44.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/home/gossip" for ::1 at 2021-02-09 03:31:51 +0100
+Processing by HomeController#gossip as HTML
+  Rendering home/gossip.html.erb within layouts/application
+  [1m[36mGossip Load (0.3ms)[0m  [1m[34mSELECT "gossips".* FROM "gossips"[0m
+  ↳ app/views/home/gossip.html.erb:4
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/home/gossip.html.erb:7
+  Rendered home/gossip.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 44ms (Views: 40.7ms | ActiveRecord: 0.5ms)
+
+
